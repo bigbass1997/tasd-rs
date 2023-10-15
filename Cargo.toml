@@ -12,3 +12,4 @@ categories = ["encoding", "parser-implementations", "data-structures"]
 [dependencies]
 strum = "0.25"
 strum_macros = "0.25"
+camino = "1.1"

@@ -1,5 +1,5 @@
-use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
+use camino::Utf8PathBuf;
 use crate::spec::packets::{DumpCreated, Encode, Packet, PacketError};
 use crate::spec::reader::Reader;
 use crate::spec::writer::Writer;
@@ -36,7 +36,7 @@ pub struct TasdFile {
     pub version: u16,
     pub keylen: u8,
     pub packets: Vec<Packet>,
-    pub path: Option<PathBuf>,
+    pub path: Option<Utf8PathBuf>,
 }
 impl Default for TasdFile {
     fn default() -> Self { Self {
@@ -58,7 +58,7 @@ impl TasdFile {
         tasd
     }
     
-    pub fn parse_file<P: Into<PathBuf>>(path: P) -> Result<Self, TasdError> {
+    pub fn parse_file<P: Into<Utf8PathBuf>>(path: P) -> Result<Self, TasdError> {
         let path = path.into();
         let data = std::fs::read(&path)?;
         let mut file = Self::parse_slice(&data)?;

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [Unreleased]
+- Changed path types to use `camino` UTF-8 enforced types
+
 ## [0.4.0] - 2023-10-13
 - Added strum EnumString to PacketKind to allow converting to/from a string
 - Added method for writing a string prefixed with a u8 length byte
