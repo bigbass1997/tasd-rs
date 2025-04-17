@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
+- Updated INPUT_MOMENT and TRANSITION to latest spec
 - Added conversion to/from legacy input formats (r08 and GBI)
 - Changed path types to use `camino` UTF-8 enforced types
 

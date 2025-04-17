@@ -170,6 +170,7 @@ impl Packet {
         let payload = Reader::new(&payload);
         
         let key = key.as_slice();
+        //println!("decoding key: {key:02X?}");
         Ok(match key {
             KEY_CONSOLE_TYPE => Packet::ConsoleType(ConsoleType::decode(key, payload)?),
             KEY_CONSOLE_REGION => Packet::ConsoleRegion(ConsoleRegion::decode(key, payload)?),
@@ -1627,18 +1628,20 @@ impl Encode for InputChunk {
 #[derive(Debug, Clone, PartialEq)]
 pub struct InputMoment {
     pub port: u8,
+    pub hold: bool,
     pub index_type: u8,
     pub index: u64,
     pub inputs: Vec<u8>,
 }
 impl Decode for InputMoment {
     fn decode(key: &[u8], mut payload: Reader) -> Result<Self, PacketError> {
-        if payload.remaining() < 10 {
+        if payload.remaining() < 11 {
             return Err(PacketError::invalid(key, payload));
         }
         
         Ok(Self {
             port: payload.read_u8(),
+            hold: payload.read_bool(),
             index_type: payload.read_u8(),
             index: payload.read_u64(),
             inputs: payload.read_remaining().to_vec(),
@@ -1654,6 +1657,7 @@ impl Encode for InputMoment {
         let mut w = Writer::new();
         
         w.write_u8(self.port);
+        w.write_bool(self.hold);
         w.write_u8(self.index_type);
         w.write_u64(self.index);
         w.write_slice(&self.inputs);
@@ -1670,27 +1674,27 @@ impl Encode for InputMoment {
 ////////////////////////////////////// TRANSITION //////////////////////////////////////
 #[derive(Debug, Clone, PartialEq)]
 pub struct Transition {
-    pub index_type: u8,
     pub port: u8,
+    pub index_type: u8,
     pub index: u64,
     pub transition_type: u8,
     pub packet: Option<Box<Packet>>,
 }
 impl Decode for Transition {
     fn decode(key: &[u8], mut payload: Reader) -> Result<Self, PacketError> {
-        if payload.remaining() < 10 {
+        if payload.remaining() < 11 {
             return Err(PacketError::invalid(key, payload));
         }
-        let index_type = payload.read_u8();
         let port = payload.read_u8();
+        let index_type = payload.read_u8();
         let index = payload.read_u64();
         let transition_type = payload.read_u8();
         let packet_data = payload.read_remaining();
         let mut packet_reader = Reader::new(&packet_data);
         
         Ok(Self {
-            index_type,
             port,
+            index_type,
             index,
             transition_type,
             packet: if transition_type == 0xFF { Some(Box::new(Packet::with_reader(&mut packet_reader, key.len() as u8)?)) } else { None }
@@ -1705,8 +1709,8 @@ impl Encode for Transition {
     fn encode(&self, keylen: u8) -> Vec<u8> {
         let mut w = Writer::new();
         
-        w.write_u8(self.index_type);
         w.write_u8(self.port);
+        w.write_u8(self.index_type);
         w.write_u64(self.index);
         w.write_u8(self.transition_type);
         if let Some(packet) = self.packet.as_ref() {

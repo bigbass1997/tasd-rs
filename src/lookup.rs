@@ -147,8 +147,9 @@ pub fn transition_index_lut(kind: u8) -> Option<String> {
         0x01 => "Frame",
         0x02 => "Cycle Count",
         0x03 => "Milliseconds",
-        0x04 => "Microseconds * 10",
-        0x05 => "INPUT_CHUNK Index",
+        0x04 => "Microseconds",
+        0x05 => "Nanoseconds",
+        0x06 => "INPUT_CHUNK Index",
         _ => return None
     }.into())
 }
