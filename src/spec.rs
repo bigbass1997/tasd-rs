@@ -4,6 +4,7 @@ use crate::spec::packets::{DumpCreated, Encode, Packet, PacketError};
 use crate::spec::reader::Reader;
 use crate::spec::writer::Writer;
 
+pub mod legacy;
 pub mod packets;
 pub mod reader;
 pub mod writer;
