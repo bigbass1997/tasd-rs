@@ -1,15 +1,5 @@
-[package]
-name = "tasd"
-version = "0.5.0"
-edition = "2021"
-authors = ["Luke Stadem <bigbass1997.website@gmail.com>"]
-description = "Encoder/decoder for the TASD file format."
-license = "MIT"
-repository = "https://github.com/bigbass1997/tasd"
-keywords = ["dump", "tas", "tasd", "encoding", "decoding"]
-categories = ["encoding", "parser-implementations", "data-structures"]
-
-[dependencies]
-strum = "0.25"
-strum_macros = "0.25"
-camino = "1.1"
+[workspace]
+resolver = "3"
+members = [
+    "tasd", "tasd-macros",
+]

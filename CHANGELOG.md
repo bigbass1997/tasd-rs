@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [Unreleased] - 2025-04-19
+- Created two new derive macros for handling the encoding and decoding of derived packet types.
+- Removed all old parsing code.
+- Temporarily removed legacy format functionality.
+
 ## [0.5.0] - 2025-04-17
 - Updated INPUT_MOMENT and TRANSITION to latest spec
 - Added conversion to/from legacy input formats (r08 and GBI)

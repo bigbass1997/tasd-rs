@@ -1,0 +1,24 @@
+[package]
+name = "tasd"
+version = "0.5.0"
+edition = "2024"
+authors = ["Luke Stadem <bigbass1997.website@gmail.com>"]
+description = "Encoder/decoder for the TASD file format."
+license = "MIT"
+repository = "https://github.com/bigbass1997/tasd"
+keywords = ["dump", "tas", "tasd", "encoding", "decoding"]
+categories = ["encoding", "parser-implementations", "data-structures"]
+
+[features]
+time = ["dep:time"]
+
+[dependencies]
+strum = "0.25"
+strum_macros = "0.25"
+camino = "1.1"
+num_enum = "0.7"
+tasd-macros = { path = "../tasd-macros" }
+paste = "1.0"
+derive_more = { version = "2.0", features = ["from", "is_variant", "try_unwrap", "unwrap"] }
+byteorder = "1.5"
+time = { version = "0.3", optional = true }

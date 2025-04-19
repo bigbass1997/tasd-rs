@@ -1,6 +1,6 @@
 use crate::spec::legacy::LegacyError::*;
 use crate::spec::packets::{ConsoleType, InputChunk, InputMoment, Packet, PortController};
-use crate::spec::TasdFile;
+use crate::TasdFile;
 
 
 #[derive(Debug)]
@@ -168,6 +168,7 @@ impl TryFrom<Gbi> for TasdFile {
         
         todo!();
         
+        #[allow(unused)]
         Ok(tasd)
     }
 }
@@ -180,7 +181,7 @@ impl TryFrom<Gbi> for TasdFile {
 mod tests {
     use crate::spec::legacy::R08;
     use crate::spec::packets::{InputChunk, Packet, PortController};
-    use crate::spec::TasdFile;
+    use crate::TasdFile;
     
     #[test]
     fn r08() {
