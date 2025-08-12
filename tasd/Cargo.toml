@@ -17,7 +17,7 @@ strum = "0.25"
 strum_macros = "0.25"
 camino = "1.1"
 num_enum = "0.7"
-tasd-macros = "0.1"
+tasd-macros = { version = "0.1", path = "../tasd-macros" }
 paste = "1.0"
 derive_more = { version = "2.0", features = ["from", "is_variant", "try_unwrap", "unwrap"] }
 byteorder = "1.5"

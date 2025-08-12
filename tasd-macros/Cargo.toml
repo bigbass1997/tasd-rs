@@ -2,6 +2,12 @@
 name = "tasd-macros"
 version = "0.1.0"
 edition = "2024"
+authors = ["Luke Stadem <bigbass1997.website@gmail.com>"]
+description = "Procedural macros for the tasd crate"
+license = "MIT"
+repository = "https://github.com/bigbass1997/tasd"
+keywords = ["macro", "proc-macro", "tasd", "encoding", "decoding"]
+categories = ["encoding", "parser-implementations", "data-structures"]
 
 [lib]
 proc-macro = true
@@ -9,4 +15,4 @@ proc-macro = true
 [dependencies]
 quote = "1.0"
 proc-macro2 = "1.0"
-syn = { version = "2.0", features = ["full"] }
+syn = { version = "2.0", features = ["extra-traits", "full"] }
