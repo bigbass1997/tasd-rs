@@ -33,7 +33,6 @@ fn derive_encode(input: &DeriveInput) -> proc_macro2::TokenStream {
                 }
             };
             
-            //eprintln!("ENUM: {output}");
             output
         }
         _ => panic!("derive wrapper only supports enums"),
@@ -62,12 +61,7 @@ fn derive_decode(input: &DeriveInput) -> proc_macro2::TokenStream {
                     fn decode<R: Read + Seek>(reader: &mut R) -> Result<Self, DecodeError> {
                         let packet_start = reader.stream_position()?;
                         
-                        /*fn try_decode<T: Decode, R: Read + Seek>(reader: &mut R) -> Result<T, DecodeError> {
-                            T::decode(reader)
-                        }*/
-                        
                         let mut packet = None;
-                        
                         #(
                             packet = <#variant_idents>::decode(reader).map(|inner| inner.into()).ok();
                             if packet.is_some() {
