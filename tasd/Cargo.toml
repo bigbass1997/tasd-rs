@@ -1,6 +1,6 @@
 [package]
 name = "tasd"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2024"
 authors = ["Luke Stadem <bigbass1997.website@gmail.com>"]
 description = "Encoder/decoder for the TASD file format."
@@ -17,7 +17,7 @@ strum = "0.25"
 strum_macros = "0.25"
 camino = "1.1"
 num_enum = "0.7"
-tasd-macros = { path = "../tasd-macros" }
+tasd-macros = "0.1"
 paste = "1.0"
 derive_more = { version = "2.0", features = ["from", "is_variant", "try_unwrap", "unwrap"] }
 byteorder = "1.5"
