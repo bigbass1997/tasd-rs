@@ -136,3 +136,39 @@ impl TasdFile {
         Ok(())
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use std::time::Instant;
+    use super::*;
+    
+    #[test]
+    fn huge() {
+        let mut tasd = TasdFile::new();
+        
+        tasd.packets.resize(1000000, crate::packets::Transition {
+            port: 0x01,
+            index_type: crate::packets::TransitionIndexKind::Frame,
+            index: 0x123456789ABCDEF0,
+            transition_type: crate::packets::TransitionKind::PacketDerived,
+            inner_packet: Some(Box::new(crate::packets::ConsoleType {
+                console: crate::packets::Console::Custom,
+                name: "Gamesphere".into(),
+            }.into())),
+        }.into());
+        
+        let start = Instant::now();
+        let data = tasd.encode().unwrap();
+        let encoded = start.elapsed();
+        let start = Instant::now();
+        let new_tasd = TasdFile::parse_slice(&data).unwrap();
+        let decoded = start.elapsed();
+        
+        println!("{:.3}s, {:.3}s", encoded.as_secs_f32(), decoded.as_secs_f32());
+        
+        assert_eq!(tasd, new_tasd);
+    }
+    
+    //TODO: Write more tests
+}
