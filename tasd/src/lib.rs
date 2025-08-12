@@ -13,7 +13,7 @@ pub enum TasdError {
     Io(std::io::Error),
     Packet(DecodeError),
     MissingHeader,
-    MagicNumberMismatch(Vec<u8>),
+    MagicNumberMismatch([u8; 4]),
     UnsupportedVersion,
     MissingPath,
 }
@@ -72,7 +72,7 @@ impl TasdFile {
     /// No modifications will be made to the parsed file data.
     pub fn parse_slice(data: &[u8]) -> Result<Self, TasdError> {
         let mut reader = Cursor::new(data);
-        let mut magic = vec![0u8; 4];
+        let mut magic = [0u8; 4];
         reader.read_exact(&mut magic).map_err(|_| TasdError::MissingHeader)?;
         if magic != MAGIC_NUMBER {
             return Err(TasdError::MagicNumberMismatch(magic));
@@ -108,7 +108,7 @@ impl TasdFile {
         })
     }
     
-    /// Encodes this [TasdFile] into a TASD formatted [`Vec<u8>`][Vec].
+    /// Encodes this [TasdFile] into the TASD formatted [`Vec<u8>`][Vec].
     pub fn encode(&self) -> Result<Vec<u8>, std::io::Error> {
         let mut w = Cursor::new(Vec::with_capacity(8));
         

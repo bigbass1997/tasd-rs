@@ -86,7 +86,6 @@ fn derive_decode(input: &DeriveInput) -> proc_macro2::TokenStream {
                 }
             };
             
-            //eprintln!("ENUM: {output}");
             output
         }
         _ => panic!("derive wrapper only supports enums"),

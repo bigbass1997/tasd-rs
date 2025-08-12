@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Created two new derive macros for handling the encoding and decoding of derived packet types.
 - Removed all old parsing code.
 - Temporarily removed legacy format functionality.
+- Changed `MagicNumberMismatch` data type to a 4-byte array
 
 ## [0.5.0] - 2025-04-17
 - Updated INPUT_MOMENT and TRANSITION to latest spec

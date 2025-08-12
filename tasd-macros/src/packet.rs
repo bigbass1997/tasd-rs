@@ -87,7 +87,6 @@ fn derive_encode(input: &DeriveInput) -> proc_macro2::TokenStream {
                 }
             };
             
-            //eprintln!("STRUCT: {output}");
             output
         },
         Data::Enum(_e) => {
@@ -114,7 +113,6 @@ fn derive_encode(input: &DeriveInput) -> proc_macro2::TokenStream {
                 }
             };
             
-            //eprintln!("ENUM: {output}");
             output
         },
         _ => panic!("derive packet doesn't support unions")
